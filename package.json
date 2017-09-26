@@ -1,6 +1,6 @@
 {
   "name": "react-clickout-handler",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A flexible clickout handler for React",
   "main": "lib/react-clickout-handler.cjs.js",
   "module": "lib/react-clickout-handler.esm.js",
