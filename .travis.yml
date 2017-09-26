@@ -1,0 +1,25 @@
+language: node_js
+
+sudo: false
+
+cache:
+  yarn: true
+  directories:
+  - node_modules
+
+branches:
+  only:
+  - master
+
+script:
+- yarn ci
+- yarn build
+
+deploy:
+  provider: npm
+  email: chris.f.burbank@gmail.com
+  api_key:
+    secure: GrULrnIcIHf5FIJls6AxMHv7x8pTyOH2rV3wpXNxwxF+Xk6QsK3ldlb0Tkthpe/xWavdOn66IFb1CSmtb3H/uYKw/FVxyoKtoNw9NEO8X+/3zCZZQtnQS9mbfWahAw73GbcfhQuYP8l20EWtTyn3poEFH1J6hxemnYe/5LttiCTa7ckK9tvCS30pQbuZRhulp9aaN4L+PL6Tpa+myibPhJtV/l7RfSY6qAhhdrqp9hJu5/R9kCfi8/SoiwN7VBVrGE00Eyf9aQ0lp1fPtV/RBFINeZhkA1Tt8pVYrA0pt+5PiUEvmJ97tEejZlddqPrlZHO6XBN4Vl7Hmxp0ExP+16Gvs+B5cZZzVCCcT/nMh8ixWo5OmExcEFFuEq2yn7aBSRMODasYHxFjVh0/oFAfujvCLZwioFq9V3cFXX8zscn5BzgBQXPHzUWGipa3nqB8BwIlKo2A2Yfb4VEMP8Acikp7D96/lkn3qm0L/6boA5S+eXm2aTwfsCMkozN1OzFqihIhkrhI9TzIypPszz43XIFHsaZx6v31Zy8jC+lPx5RHvx08tnp4qyneYY7dUns//IrvDXDWDRplajq5l/xXGhstEp0uJqKdt2rVOaBGBF/rs4J+y9p/PSV0T9aubHOUGbp29LQ+3oH/Jv4Mbw6mIXok2DQBtDziiNi3rJirIe0=
+  on:
+    tags: true
+  skip_cleanup: true

@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "rimraf lib && rollup -c",
+    "ci": "yarn test && yarn lint",
     "lint": "eslint src",
     "test": "NODE_ENV=test mocha --require src/test/testHelper.js src/test/index.spec.js"
   },
