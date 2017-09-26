@@ -86,7 +86,7 @@ export default class = MyComponent extends Component {
         >
           <SomeComponent onChange={this.handleChange} />
         </ClickOutHandler>
-        <button onClick={this.save}>
+        <button ref={this.setRef} onClick={this.save}>
           Save
         </button>
       </div>
