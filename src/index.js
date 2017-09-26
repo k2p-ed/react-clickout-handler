@@ -39,11 +39,13 @@ export default class ClickOutHandler extends Component {
 
   setRef = (el) => { this.wrapper = el }
 
-  getWrapper = () => React.createElement(
-    this.props.wrapWith || 'div',
-    { [this.props.refProp]: this.setRef },
-    this.props.children
-  )
+  getWrapper() {
+    return React.createElement(
+      this.props.wrapWith || 'div',
+      { [this.props.refProp]: this.setRef },
+      this.props.children
+    )
+  }
 
   shouldFire(ev) {
     return (
