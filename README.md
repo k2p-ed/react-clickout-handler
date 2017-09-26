@@ -2,6 +2,9 @@
 
 A React component to handle clicking outside of an element.
 
+[![travis build](https://img.shields.io/travis/k2p-ed/react-clickout-handler.svg?style=flat-square)](https://travis-ci.org/k2p-ed/react-clickout-handler)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
 ### Features
 
 * Wrap a single element or multiple elements to watch for clickout behavior
