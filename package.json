@@ -1,0 +1,56 @@
+{
+  "name": "react-clickout-handler",
+  "version": "0.0.1",
+  "description": "A flexible clickout handler for React",
+  "main": "lib/react-clickout-handler.cjs.js",
+  "module": "lib/react-clickout-handler.esm.js",
+  "author": "Knowledge to Practice <opensource@k2p.com> (http://www.knowledgetopractice.com/)",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k2p-ed/react-clickout-handler"
+  },
+  "scripts": {
+    "build": "rimraf lib && rollup -c",
+    "lint": "eslint src",
+    "test": "NODE_ENV=test mocha --require src/test/testHelper.js src/test/index.spec.js"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "jsdom": "^11.2.0",
+    "mocha": "^3.5.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "sinon": "^3.3.0"
+  },
+  "peerDependencies": {
+    "react": "^15.5.x || ^16.x",
+    "react-dom": "^15.5.x || ^16.x"
+  },
+  "files": [
+    "lib"
+  ]
+}
