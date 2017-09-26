@@ -62,7 +62,7 @@ If there are any elements outside of your ClickOutHandler component that you do 
 import React, { Component } from 'react'
 import ClickOutHandler from 'react-clickout-handler'
 
-export default class = MyComponent extends Component {
+export default class MyComponent extends Component {
   state = {
     data: ''
   }
@@ -81,7 +81,7 @@ export default class = MyComponent extends Component {
     return (
       <div id='my-app'>
         <ClickOutHandler
-          ignoredElements={[this.button]}
+          ignoredElements={[this.saveButton]}
           onClickOut={handleClickOut}
         >
           <SomeComponent onChange={this.handleChange} />
