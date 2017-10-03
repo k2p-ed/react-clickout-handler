@@ -20,7 +20,7 @@
     "test": "NODE_ENV=test mocha --require src/test/testHelper.js src/test/index.spec.js"
   },
   "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.7"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
