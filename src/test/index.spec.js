@@ -8,6 +8,21 @@ import sinon from 'sinon'
 import ClickOutHandler from '../'
 
 describe('ClickOutHandler', () => {
+  it('should allow specifying custom trigger events', () => {
+    const onClickOut = sinon.spy()
+    mount(
+      <div>
+        <ClickOutHandler onClickOut={onClickOut} events={['mouseenter']}>
+          <div />
+        </ClickOutHandler>
+        <div id='test' />
+      </div>
+    )
+    const event = new MouseEvent('mouseenter')
+    document.dispatchEvent(event)
+    expect(onClickOut.calledOnce).to.be.true
+  })
+
   context('when an element other than a child is clicked', () => {
     context('and when optional props are using default values', () => {
       it('should execute the onClickOut callback', () => {

@@ -9,6 +9,7 @@ export default class ClickOutHandler extends Component {
       PropTypes.node
     ]).isRequired,
     enabled: PropTypes.bool,
+    events: PropTypes.arrayOf(PropTypes.string),
     ignoredElements: PropTypes.arrayOf(PropTypes.object),
     refProp: PropTypes.string,
     wrapWith: PropTypes.oneOfType([
@@ -21,19 +22,20 @@ export default class ClickOutHandler extends Component {
 
   static defaultProps = {
     enabled: true,
+    events: ['mousedown', 'touchstart'],
     ignoredElements: [],
     refProp: 'ref',
     wrapWith: null
   }
 
   componentDidMount() {
-    this.events.forEach((event) => {
+    this.props.events.forEach((event) => {
       document.addEventListener(event, this.handleClickOut)
     })
   }
 
   componentWillUnmount() {
-    this.events.forEach((event) => {
+    this.props.events.forEach((event) => {
       document.removeEventListener(event, this.handleClickOut)
     })
   }
@@ -61,8 +63,6 @@ export default class ClickOutHandler extends Component {
   handleClickOut = (ev) => {
     if (this.shouldFire(ev)) this.props.onClickOut(ev)
   }
-
-  events = ['mousedown', 'touchstart']
 
   render() {
     const { children, refProp, wrapWith } = this.props
