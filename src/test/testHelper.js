@@ -6,6 +6,12 @@ const jsdom = require('jsdom')
 
 const { JSDOM } = jsdom
 
+// Enzyme config
+const { configure } = require('enzyme')
+const Adapter = require('enzyme-adapter-react-16')
+
+configure({ adapter: new Adapter() })
+
 const exposedProperties = ['window', 'navigator', 'document']
 
 const { document } = (new JSDOM('')).window
