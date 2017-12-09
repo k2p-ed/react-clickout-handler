@@ -9,7 +9,7 @@ import ClickOutHandler from '../'
 
 describe('ClickOutHandler', () => {
   context('when an element other than a child is clicked', () => {
-    context('when optional props are using default values', () => {
+    context('and when optional props are using default values', () => {
       it('should execute the onClickOut callback', () => {
         const onClickOut = sinon.spy()
         mount(
@@ -26,7 +26,7 @@ describe('ClickOutHandler', () => {
       })
     })
 
-    context('when the "enabled" prop is false', () => {
+    context('and when the "enabled" prop is false', () => {
       it('should not execute the onClickOut callback', () => {
         const onClickOut = sinon.spy()
         mount(
@@ -114,6 +114,32 @@ describe('ClickOutHandler', () => {
         </ClickOutHandler>
       )
       expect(wrapper.find('.test').props().innerRef).to.be.ok
+    })
+  })
+
+  context('when a function is passed as the component child', () => {
+    it('should call the child function', () => {
+      const onClickOut = () => {}
+      const wrapper = shallow(
+        <ClickOutHandler onClickOut={onClickOut}>
+          {() => <div className='test' />}
+        </ClickOutHandler>
+      )
+      expect(wrapper.find('.test')).to.be.ok
+    })
+
+    it('should pass an object containing a ref callback as a paraeter', () => {
+      const onClickOut = () => {}
+      let testRef = null
+      shallow(
+        <ClickOutHandler onClickOut={onClickOut}>
+          {({ ref }) => {
+            testRef = ref
+            return <div className='test' />
+          }}
+        </ClickOutHandler>
+      )
+      expect(testRef).to.be.ok
     })
   })
 })

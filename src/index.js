@@ -5,6 +5,7 @@ export default class ClickOutHandler extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.array,
+      PropTypes.func,
       PropTypes.node
     ]).isRequired,
     enabled: PropTypes.bool,
@@ -39,10 +40,11 @@ export default class ClickOutHandler extends Component {
 
   setRef = (el) => { this.wrapper = el }
 
-  getWrapper() {
+  wrapper() {
     return React.createElement(
-      this.props.wrapWith || 'div',
-      { [this.props.refProp]: this.setRef },
+      this.props.wrapWith || 'div', {
+        [this.props.refProp]: this.setRef
+      },
       this.props.children
     )
   }
@@ -65,8 +67,8 @@ export default class ClickOutHandler extends Component {
   render() {
     const { children, refProp, wrapWith } = this.props
 
-    return Array.isArray(this.props.children) || wrapWith
-      ? this.getWrapper()
-      : React.cloneElement(React.Children.only(children), { [refProp]: this.setRef })
+    if (Array.isArray(children) || wrapWith) return this.wrapper()
+    if (typeof children === 'function') return children({ ref: this.setRef })
+    return React.cloneElement(React.Children.only(children), { [refProp]: this.setRef })
   }
 }
