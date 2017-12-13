@@ -16,7 +16,6 @@
     "ci": "yarn test && yarn lint",
     "lint": "eslint src",
     "preversion": "yarn ci",
-    "postversion": "git push --follow-tags",
     "test": "NODE_ENV=test mocha --require src/test/testHelper.js src/test/index.spec.js"
   },
   "dependencies": {
