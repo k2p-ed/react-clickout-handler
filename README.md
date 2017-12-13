@@ -49,7 +49,7 @@ or
 | Prop | Type | Required | Default | Description |
 |-------------------|----------------------------------------------|----------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `children` | `oneOfType([   array, func, node ])` | true |  | The element(s) you want to trigger the `onClickOut` callback when clicked outside of |
-| `enabled` | `func` | false | `true` | Enables or disables the clickout behavior. This can be useful to ensure the `onClickOut` callback is only executed when you want it to be. |
+| `enabled` | `bool` | false | `true` | Enables or disables the clickout behavior. This can be useful to ensure the `onClickOut` callback is only executed when you want it to be. |
 | `events` | `arrayOf(string)` | false | `['mousedown', 'touchstart']` | Allows for specifying custom events to trigger the `onClickOut` callback |
 | `ignoredElements` | `arrayOf(object)` | false | `[]` | An array of refs for elements to exclude from triggering the clickout behavior |
 | `refProp` | `string` | false | `ref` | Specify a prop name to use for getting a ref to the wrapped component. Useful if you need to get the ref for a "composed" component, or if you're using something like [styled-components](https://www.styled-components.com/), which requires use of `innerRef` to get the ref of a styled component. |
@@ -103,7 +103,7 @@ export default class MyComponent extends Component {
 
 `ClickOutHandler` relies on having a ref to its immediate child. If the child is unable to directly accept a `ref` prop, there are two options:
 
-1. Use the `refProp` prop
+Use the `refProp` prop
 
 ```js
   import React from 'react'
@@ -125,7 +125,7 @@ export default class MyComponent extends Component {
   )
 ```
 
-2. Pass a function as the child
+Pass a function as the child
 
 ```js
   import React from 'react'
