@@ -42,7 +42,7 @@ export default class ClickOutHandler extends Component {
 
   setRef = (el) => { this.wrapper = el }
 
-  wrapper() {
+  getWrapper() {
     return React.createElement(
       this.props.wrapWith || 'div', {
         [this.props.refProp]: this.setRef
@@ -67,7 +67,7 @@ export default class ClickOutHandler extends Component {
   render() {
     const { children, refProp, wrapWith } = this.props
 
-    if (Array.isArray(children) || wrapWith) return this.wrapper()
+    if (Array.isArray(children) || wrapWith) return this.getWrapper()
     if (typeof children === 'function') return children({ ref: this.setRef })
     return React.cloneElement(React.Children.only(children), { [refProp]: this.setRef })
   }
