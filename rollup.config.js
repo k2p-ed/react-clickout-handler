@@ -11,7 +11,6 @@ export default {
   ],
   plugins: [
     resolve(),
-    commonjs(),
     babel({
       babelrc: false,
       exclude: ['node_modules/**'],
@@ -21,7 +20,8 @@ export default {
         ['env', { modules: false }],
         'stage-0'
       ]
-    })
+    }),
+    commonjs()
   ],
   external: [
     'react',
