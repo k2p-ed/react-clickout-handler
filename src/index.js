@@ -1,25 +1,22 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
 
-export default class ClickOutHandler extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.func,
-      PropTypes.node
-    ]).isRequired,
-    enabled: PropTypes.bool,
-    events: PropTypes.arrayOf(PropTypes.string),
-    ignoredElements: PropTypes.arrayOf(PropTypes.object),
-    refProp: PropTypes.string,
-    wrapWith: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string
-    ]),
-    onClickOut: PropTypes.func.isRequired
-  }
+import React, { Component, type ElementType, type Node } from 'react'
 
+type ClickEvent = SyntheticEvent<HTMLElement>
+
+type Ref = (el: HTMLElement) => void
+
+type Props = {
+  children: Node | ({ [string]: Ref }) => any,
+  enabled: boolean,
+  events: string[],
+  ignoredElements: HTMLElement[],
+  refProp: string,
+  wrapWith: ?ElementType,
+  onClickOut: (ev: ClickEvent) => any
+}
+
+export default class ClickOutHandler extends Component<Props> {
   static defaultProps = {
     enabled: true,
     events: ['mousedown', 'touchstart'],
@@ -28,47 +25,51 @@ export default class ClickOutHandler extends Component {
     wrapWith: null
   }
 
+  wrapper: ?HTMLElement
+
   componentDidMount() {
-    this.props.events.forEach((event) => {
+    this.props.events.forEach((event: string) => {
+      // $FlowFixMe
       document.addEventListener(event, this.handleClickOut)
     })
   }
 
   componentWillUnmount() {
-    this.props.events.forEach((event) => {
+    this.props.events.forEach((event: string) => {
+      // $FlowFixMe
       document.removeEventListener(event, this.handleClickOut)
     })
   }
 
-  setRef = (el) => { this.wrapper = el }
-
-  getWrapper() {
-    return React.createElement(
-      this.props.wrapWith || 'div', {
-        [this.props.refProp]: this.setRef
-      },
-      this.props.children
-    )
+  handleClickOut = (ev: ClickEvent) => {
+    if (this.shouldFire(ev)) this.props.onClickOut(ev)
   }
 
-  shouldFire(ev) {
+  setRef = (el: HTMLElement) => { this.wrapper = el }
+
+  shouldFire(ev: ClickEvent) {
     return (
       this.props.enabled &&
       this.wrapper &&
-      !this.wrapper.contains(ev.target) &&
-      !this.props.ignoredElements.some(element => element && element.contains(ev.target))
+      !this.wrapper.contains(ev.currentTarget) &&
+      !this.props.ignoredElements.some(element => element && element.contains(ev.currentTarget))
     )
-  }
-
-  handleClickOut = (ev) => {
-    if (this.shouldFire(ev)) this.props.onClickOut(ev)
   }
 
   render() {
     const { children, refProp, wrapWith } = this.props
+    const props = { [refProp]: this.setRef }
 
-    if (Array.isArray(children) || wrapWith) return this.getWrapper()
-    if (typeof children === 'function') return children({ ref: this.setRef })
-    return React.cloneElement(React.Children.only(children), { [refProp]: this.setRef })
+    if (typeof children === 'function') {
+      return children(props)
+    }
+
+    if (Array.isArray(children) || wrapWith) {
+      const Wrapped = wrapWith || 'div'
+
+      return <Wrapped {...props}>{children}</Wrapped>
+    }
+
+    return React.cloneElement(React.Children.only(children), props)
   }
 }

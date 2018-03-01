@@ -14,11 +14,15 @@ export default {
     babel({
       babelrc: false,
       exclude: ['node_modules/**'],
-      plugins: ['external-helpers'],
+      plugins: [
+        'external-helpers',
+        'transform-flow-strip-types'
+      ],
       presets: [
         'react',
         ['env', { modules: false }],
-        'stage-0'
+        'stage-0',
+        'flow'
       ]
     }),
     commonjs()

@@ -143,7 +143,7 @@ describe('ClickOutHandler', () => {
       expect(wrapper.find('.test')).to.be.ok
     })
 
-    it('should pass an object containing a ref callback as a paraeter', () => {
+    it('should pass an object containing a ref callback as an argument', () => {
       const onClickOut = () => {}
       let testRef = null
       shallow(

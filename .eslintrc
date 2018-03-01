@@ -7,13 +7,20 @@
     "mocha": true
   },
   "extends": [
-    "airbnb"
+    "airbnb",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype"
   ],
   "rules": {
     "comma-dangle": ["error", "never"],
     "import/extensions": [2, { "js": "never", "jsx": "never"}],
     "jsx-quotes": ["error", "prefer-single"],
     "react/jsx-filename-extension": [2, { "extensions": [".js"] }],
+    "react/sort-comp": 0,
     "semi": ["error", "never"]
   }
 }
