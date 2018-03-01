@@ -2,8 +2,6 @@
 
 import React, { Component, type ElementType, type Node } from 'react'
 
-type ClickEvent = SyntheticEvent<HTMLElement>
-
 type Ref = (el: HTMLElement) => void
 
 type Props = {
@@ -13,7 +11,7 @@ type Props = {
   ignoredElements: HTMLElement[],
   refProp: string,
   wrapWith: ?ElementType,
-  onClickOut: (ev: ClickEvent) => any
+  onClickOut: (ev: Event) => any
 }
 
 export default class ClickOutHandler extends Component<Props> {
@@ -29,30 +27,30 @@ export default class ClickOutHandler extends Component<Props> {
 
   componentDidMount() {
     this.props.events.forEach((event: string) => {
-      // $FlowFixMe
       document.addEventListener(event, this.handleClickOut)
     })
   }
 
   componentWillUnmount() {
     this.props.events.forEach((event: string) => {
-      // $FlowFixMe
       document.removeEventListener(event, this.handleClickOut)
     })
   }
 
-  handleClickOut = (ev: ClickEvent) => {
+  handleClickOut = (ev: Event) => {
     if (this.shouldFire(ev)) this.props.onClickOut(ev)
   }
 
   setRef = (el: HTMLElement) => { this.wrapper = el }
 
-  shouldFire(ev: ClickEvent) {
+  shouldFire(ev: Event) {
     return (
       this.props.enabled &&
       this.wrapper &&
-      !this.wrapper.contains(ev.currentTarget) &&
-      !this.props.ignoredElements.some(element => element && element.contains(ev.currentTarget))
+      !this.wrapper.contains((ev.currentTarget: any)) &&
+      !this.props.ignoredElements.some(element => (
+        element && element.contains((ev.currentTarget: any))
+      ))
     )
   }
 
