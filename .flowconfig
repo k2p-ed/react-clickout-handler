@@ -1,4 +1,6 @@
 [ignore]
+./lib/.*
+.*\.spec\.js
 
 [include]
 
