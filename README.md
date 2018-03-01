@@ -48,13 +48,13 @@ or
 
 | Prop | Type | Required | Default | Description |
 |-------------------|----------------------------------------------|----------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `children` | `oneOfType([   array, func, node ])` | true |  | The element(s) you want to trigger the `onClickOut` callback when clicked outside of |
-| `enabled` | `bool` | false | `true` | Enables or disables the clickout behavior. This can be useful to ensure the `onClickOut` callback is only executed when you want it to be. |
-| `events` | `arrayOf(string)` | false | `['mousedown', 'touchstart']` | Allows for specifying custom events to trigger the `onClickOut` callback |
-| `ignoredElements` | `arrayOf(object)` | false | `[]` | An array of refs for elements to exclude from triggering the clickout behavior |
+| `children` | `Node | ({ [string]: Ref }) => any` | true |  | The element(s) you want to trigger the `onClickOut` callback when clicked outside of |
+| `enabled` | `boolean` | false | `true` | Enables or disables the clickout behavior. This can be useful to ensure the `onClickOut` callback is only executed when you want it to be. |
+| `events` | `string[]` | false | `['mousedown', 'touchstart']` | Allows for specifying custom events to trigger the `onClickOut` callback |
+| `ignoredElements` | `Object[]` | false | `[]` | An array of refs for elements to exclude from triggering the clickout behavior |
 | `refProp` | `string` | false | `ref` | Specify a prop name to use for getting a ref to the wrapped component. Useful if you need to get the ref for a "composed" component, or if you're using something like [styled-components](https://www.styled-components.com/), which requires use of `innerRef` to get the ref of a styled component. |
-| `wrapWith` | `oneOfType([   element,   func,   string ])` | false | `null` | Specify what type of element to wrap the children with. Can be a React component or string such as `div`.  If this prop is not provided, the `ClickOutHandler` component will either clone the child element (if single child) or wrap the children in a `div` (if multiple children). |
-| `onClickOut` | `func` | true |  | Function to be called when the clickout behavior is triggered. Receives the click event as an argument. |
+| `wrapWith` | `ElementType` | false | `null` | Specify what type of element to wrap the children with. Can be a React component or string such as `div`.  If this prop is not provided, the `ClickOutHandler` component will either clone the child element (if single child) or wrap the children in a `div` (if multiple children). |
+| `onClickOut` | `(ev: Event) => any` | true |  | Function to be called when the clickout behavior is triggered. Receives the click event as an argument. |
 
 ### Examples
 
