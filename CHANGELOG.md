@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.2.1]
+- Fix issue causing callback to fire when clicking child component
+
 ## [1.2.0]
 - Added Flow type definitions.
 
