@@ -47,9 +47,9 @@ export default class ClickOutHandler extends Component<Props> {
     return (
       this.props.enabled &&
       this.wrapper &&
-      !this.wrapper.contains((ev.currentTarget: any)) &&
+      !this.wrapper.contains((ev.target: any)) &&
       !this.props.ignoredElements.some(element => (
-        element && element.contains((ev.currentTarget: any))
+        element && element.contains((ev.target: any))
       ))
     )
   }
